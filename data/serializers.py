@@ -8,7 +8,7 @@ import re
 class DataBaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Data
-        fields = ['url', 'id', 'file_name', 'file', 'file_size', 'created', 'created_by', 'modified', 'modified_by']
+        fields = ['url', 'file_name', 'file', 'file_size', 'created', 'created_by', 'modified', 'modified_by']
 
     def validate(self, attrs):
         file = attrs['file']
