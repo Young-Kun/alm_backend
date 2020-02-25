@@ -17,12 +17,18 @@ class Data(models.Model):
         ordering = ['-file_name']
         verbose_name_plural = verbose_name = '源数据'
 
+    def __str__(self):
+        return self.file_name
+
 
 class Account(models.Model):
     name = models.CharField(max_length=1, primary_key=True, choices=ACCOUNTS, verbose_name='账户名称')
 
     class Meta:
         verbose_name_plural = verbose_name = '账户'
+
+    def __str__(self):
+        return self.name
 
 
 # 得分
@@ -50,12 +56,6 @@ class FieldBaseModel(models.Model):
 
     class Meta:
         abstract = True
-
-    def get_data(self):
-        return self.data.file_name
-
-    def get_account(self):
-        return self.account.name
 
 
 # 资产大类
@@ -117,6 +117,10 @@ class CostReturn(FieldBaseModel):
     fin_return = models.DecimalField(**PERCENT, verbose_name='年化会计投资收益率')
     ra_comp_return = models.DecimalField(**PERCENT, verbose_name='风险调整后综合投资收益率')
     avg_3y_return = models.DecimalField(**PERCENT, verbose_name='三年平均年化综合投资收益率')
+    comp_gap = models.DecimalField(**PERCENT, verbose_name='年化综合投资收益率与寿险业务负债资金成本率差额')
+    fin_gap = models.DecimalField(**PERCENT, verbose_name='年化会计投资收益率与寿险业务负债有效成本率差额')
+    ra_comp_gap = models.DecimalField(**PERCENT, verbose_name='风险调整后的年化综合投资收益率与寿险业务负债保证成本率差额')
+    avg_3y_gap = models.DecimalField(**PERCENT, verbose_name='三年平均年化综合投资收益率与寿险业务三年平均负债资金成本率差额')
 
     class Meta:
         verbose_name_plural = verbose_name = '成本收益匹配'

@@ -124,7 +124,8 @@ class ExcelData:
         acc_in_row = False
         cols = {'T': 3, 'C': 4, 'P': 7, 'U': 8}
         rows = {'eff_cost': 37, 'capital_cost': 38, 'gre_cost': 39, 'avg_3y_cost': 42,
-                'comp_return': 15, 'fin_return': 10, 'ra_comp_return': 32, 'avg_3y_return': 12}
+                'comp_return': 15, 'fin_return': 10, 'ra_comp_return': 32, 'avg_3y_return': 12,
+                'comp_gap': 45, 'fin_gap': 47, 'ra_comp_gap': 46, 'avg_3y_gap': 44}
 
     # 成本收益压力测试 基本情景
     @property
@@ -188,7 +189,7 @@ class ExcelData:
     class CashFlowTestBase:
         rows = {'cf_business': 8, 'cf_assets': 32, 'cf_financing': 38, 'cf_net': 47, 'cf_accumulated': 48}
         cols = {'q1_base': 3, 'q2_base': 4, 'q3_base': 5, 'q4_base': 6, 'y2_base': 7, 'y3_base': 8,
-                'q1_stress': 3, 'q2_stress': 4, 'q3_stress': 5, 'q4_stress': 6, 'y2_stress': 7, 'y3_stress': 8}
+                'q1_stress': 9, 'q2_stress': 10, 'q3_stress': 11, 'q4_stress': 12, 'y2_stress': 13, 'y3_stress': 14}
 
     # 现金流压力测试 普通账户
     @property
@@ -220,4 +221,4 @@ if __name__ == "__main__":
     data_path = os.path.join(BASE_DIR, '201912.xlsx')
     data = ExcelData(data_path)
 
-    print(data.Reserve)
+    print(data.CashFlowTest)
