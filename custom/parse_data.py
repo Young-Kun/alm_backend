@@ -72,7 +72,7 @@ class ExcelData:
         acc_in_row = False
         rows = {'dur_gap_l_scaled': 3, 'dur_gap_a_scaled': 4, 'hedge_rate': 5, 'dv': 6,
                 'cost_retrun': 7, 'cost_return_stress': 8,
-                'cash_flow_test_base': 9, 'cash_flow_test_stress': 10, 'liquidity': 11}
+                'cash_flow_test_base': 9, 'cash_flow_test_stress': 10, 'liquidity': 11, 'tot_score': 13}
         cols = {'score': 5}
 
     # 会计准备金

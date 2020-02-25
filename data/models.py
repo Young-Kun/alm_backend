@@ -5,7 +5,7 @@ from custom.precision import HUNDRED, PERCENT, BILLION
 
 
 class Data(models.Model):
-    file_name = models.CharField(max_length=6, unique=True, verbose_name='文件名')
+    file_name = models.CharField(max_length=6, primary_key=True, verbose_name='文件名')
     file = models.FileField(upload_to=REPORTS_PATH, max_length=255, unique=True, verbose_name='量化评估表')
     file_size = models.IntegerField(default=0, editable=False, verbose_name='文件大小')
     created = models.DateTimeField(auto_now_add=True, verbose_name='首次上传')
@@ -15,10 +15,14 @@ class Data(models.Model):
 
     class Meta:
         ordering = ['-file_name']
+        verbose_name_plural = verbose_name = '源数据'
 
 
 class Account(models.Model):
     name = models.CharField(max_length=1, primary_key=True, choices=ACCOUNTS, verbose_name='账户名称')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '账户'
 
 
 # 得分
@@ -33,6 +37,10 @@ class Score(models.Model):
     cash_flow_test_base = models.IntegerField(verbose_name='现金流测试得分')
     cash_flow_test_stress = models.IntegerField(verbose_name='现金流压力测试得分')
     liquidity = models.IntegerField(verbose_name='流动性指标得分')
+    tot_score = models.IntegerField(verbose_name='总分')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '得分情况'
 
 
 # 分账户的指标模型基类
@@ -43,6 +51,12 @@ class FieldBaseModel(models.Model):
     class Meta:
         abstract = True
 
+    def get_data(self):
+        return self.data.file_name
+
+    def get_account(self):
+        return self.account.name
+
 
 # 资产大类
 class Assets(FieldBaseModel):
@@ -52,10 +66,16 @@ class Assets(FieldBaseModel):
     equity = models.DecimalField(**BILLION, verbose_name='权益类投资资产')
     loan = models.DecimalField(**BILLION, verbose_name='保单贷款')
 
+    class Meta:
+        verbose_name_plural = verbose_name = '资产净额'
+
 
 # 会计准备金
 class Reserve(FieldBaseModel):
     reserve = models.DecimalField(**BILLION, verbose_name='会计准备金')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '会计准备金'
 
 
 # 修正久期
@@ -66,16 +86,25 @@ class ModifiedDuration(FieldBaseModel):
     gap_l_scaled = models.DecimalField(**HUNDRED, verbose_name='规模调整后的修正久期缺口')
     gap_a_scaled = models.DecimalField(**HUNDRED, verbose_name='资产调整后的期限缺口')
 
+    class Meta:
+        verbose_name_plural = verbose_name = '修正久期'
+
 
 # 利率风险对冲率
 class HedgeRate(FieldBaseModel):
     l_sensitivity = models.DecimalField(**PERCENT, verbose_name='利率风险负债敏感度')
     hedge_rate = models.DecimalField(**PERCENT, verbose_name='利率风险对冲率')
 
+    class Meta:
+        verbose_name_plural = verbose_name = '利率风险对冲率'
+
 
 # 基点价值变动率
 class DV(FieldBaseModel):
     dv = models.DecimalField(**PERCENT, verbose_name='基点价值变动率')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '基点价值变动率'
 
 
 # 成本收益匹配
@@ -88,6 +117,9 @@ class CostReturn(FieldBaseModel):
     fin_return = models.DecimalField(**PERCENT, verbose_name='年化会计投资收益率')
     ra_comp_return = models.DecimalField(**PERCENT, verbose_name='风险调整后综合投资收益率')
     avg_3y_return = models.DecimalField(**PERCENT, verbose_name='三年平均年化综合投资收益率')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '成本收益匹配'
 
 
 # 成本收益压力测试 基本情景
@@ -102,11 +134,17 @@ class CostReturnStressBase(FieldBaseModel):
     gap_y2 = models.DecimalField(**PERCENT, verbose_name='第二年差额')
     gap_y3 = models.DecimalField(**PERCENT, verbose_name='第三年差额')
 
+    class Meta:
+        verbose_name_plural = verbose_name = '成本收益压力测试 基本情景'
+
 
 # 成本收益压力测试 压力一
 class CostReturnStress1(FieldBaseModel):
     loss_rate = models.DecimalField(**PERCENT, verbose_name='投资资产损失率')
     gap = models.DecimalField(**PERCENT, verbose_name='压力后差额一')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '成本收益压力测试 压力一'
 
 
 # 成本收益压力测试 压力二
@@ -121,6 +159,9 @@ class CostReturnStress2(FieldBaseModel):
     gap_y2 = models.DecimalField(**PERCENT, verbose_name='第二年差额')
     gap_y3 = models.DecimalField(**PERCENT, verbose_name='第三年差额')
 
+    class Meta:
+        verbose_name_plural = verbose_name = '成本收益压力测试 压力二'
+
 
 # 成本收益压力测试 压力三
 class CostReturnStress3(FieldBaseModel):
@@ -133,6 +174,9 @@ class CostReturnStress3(FieldBaseModel):
     gap_y1 = models.DecimalField(**PERCENT, verbose_name='第一年差额')
     gap_y2 = models.DecimalField(**PERCENT, verbose_name='第二年差额')
     gap_y3 = models.DecimalField(**PERCENT, verbose_name='第三年差额')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '成本收益压力测试 压力三'
 
 
 # 现金流压力测试
@@ -206,3 +250,6 @@ class CashFlowTest(FieldBaseModel):
     cf_accumulated_q4_stress = models.DecimalField(**BILLION, verbose_name='压力情景未来第四季度累计现金及流动性管理工具')
     cf_accumulated_y2_stress = models.DecimalField(**BILLION, verbose_name='压力情景未来第二年累计现金及流动性管理工具')
     cf_accumulated_y3_stress = models.DecimalField(**BILLION, verbose_name='压力情景未来第三年累计现金及流动性管理工具')
+
+    class Meta:
+        verbose_name_plural = verbose_name = '现金流压力测试'
