@@ -15,8 +15,10 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(models.Score)
 class ScoreAdmin(admin.ModelAdmin):
-    list_display = ['data', 'tot_score', 'dur_gap_l_scaled', 'dur_gap_a_scaled', 'hedge_rate', 'dv', 'cost_retrun',
-                    'cost_return_stress', 'cash_flow_test_base', 'cash_flow_test_stress', 'liquidity']
+    list_display = ['data', 'dur_gap_l_scaled', 'dur_gap_a_scaled', 'hedge_rate', 'dv',
+                    'avg_3y_gap', 'comp_gap', 'ra_comp_gap', 'fin_gap', 'short_gap',
+                    'gap_stress1', 'gap_stress2', 'gap_stress3',
+                    'cash_flow_test_base', 'cash_flow_test_stress', 'liquidity']
     list_filter = ['data']
 
 
