@@ -15,7 +15,7 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(models.Score)
 class ScoreAdmin(admin.ModelAdmin):
-    list_display = ['data', 'dur_score', 'cost_return_score', 'cash_flow_score', 'tot_score']
+    list_display = ['data', 'tot_score', 'dur_score', 'cost_return_score', 'cash_flow_score']
     list_filter = ['data']
 
 
