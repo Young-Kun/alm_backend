@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F
 
 from alm_backend.settings import REPORTS_PATH, ACCOUNTS
 from custom.precision import HUNDRED, PERCENT, BILLION
@@ -38,6 +39,8 @@ class Score(models.Model):
     dur_gap_a_scaled = models.IntegerField(verbose_name='资产调整后的期限缺口得分')
     hedge_rate = models.IntegerField(verbose_name='利率风险对冲率得分')
     dv = models.IntegerField(verbose_name='基点价值变动率得分')
+    dur_score = models.IntegerField(default=F(dur_gap_l_scaled) + F(dur_gap_a_scaled) + F(hedge_rate) + F(dv),
+                                    editable=False, verbose_name='期限结构匹配得分')
     avg_3y_gap = models.IntegerField(verbose_name='三年平均年化综合投资收益率与寿险业务三年平均负债资金成本率差额得分')
     comp_gap = models.IntegerField(verbose_name='年化综合投资收益率与寿险业务负债资金成本率差额得分')
     ra_comp_gap = models.IntegerField(verbose_name='风险调整后的年化综合投资收益率与寿险业务负债保证成本率差额得分')
@@ -46,9 +49,16 @@ class Score(models.Model):
     gap_stress1 = models.IntegerField(verbose_name='压力情景一下预计差额得分')
     gap_stress2 = models.IntegerField(verbose_name='压力情景二下预计差额得分')
     gap_stress3 = models.IntegerField(verbose_name='压力情景三下预计差额得分')
+    cost_return_score = models.IntegerField(
+        default=F(avg_3y_gap) + F(comp_gap) + F(ra_comp_gap) + F(ra_comp_gap) + F(fin_gap) + F(short_gap) + F(
+            gap_stress1) + F(gap_stress2) + F(gap_stress3), editable=False, verbose_name='成本收益匹配得分')
     cash_flow_test_base = models.IntegerField(verbose_name='现金流测试得分')
     cash_flow_test_stress = models.IntegerField(verbose_name='现金流压力测试得分')
     liquidity = models.IntegerField(verbose_name='流动性指标得分')
+    cash_flow_score = models.IntegerField(default=F(cash_flow_test_base) + F(cash_flow_test_stress) + F(liquidity),
+                                          editable=False, verbose_name='现金流匹配得分')
+    tot_score = models.IntegerField(default=F(dur_score) + F(cost_return_score) + F(cash_flow_score), editable=False,
+                                    verbose_name='总分')
 
     class Meta:
         verbose_name_plural = verbose_name = '得分情况'

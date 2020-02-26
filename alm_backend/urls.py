@@ -19,12 +19,14 @@ from django.views.static import serve
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from data import views as data_views
+from result import views as result_views
 
 from .settings import MEDIA_ROOT
 
 router = DefaultRouter()
 # 通用路由
 router.register(r'data', data_views.DataViewSet)
+router.register(r'result', result_views.ScoreViewSet)
 
 urlpatterns = [
     # 后台管理
