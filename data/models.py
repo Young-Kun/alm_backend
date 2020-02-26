@@ -38,12 +38,17 @@ class Score(models.Model):
     dur_gap_a_scaled = models.IntegerField(verbose_name='资产调整后的期限缺口得分')
     hedge_rate = models.IntegerField(verbose_name='利率风险对冲率得分')
     dv = models.IntegerField(verbose_name='基点价值变动率得分')
-    cost_retrun = models.IntegerField(verbose_name='成本收益匹配状况得分')
-    cost_return_stress = models.IntegerField(verbose_name='成本收益匹配压力测试得分')
+    avg_3y_gap = models.IntegerField(verbose_name='三年平均年化综合投资收益率与寿险业务三年平均负债资金成本率差额得分')
+    comp_gap = models.IntegerField(verbose_name='年化综合投资收益率与寿险业务负债资金成本率差额得分')
+    ra_comp_gap = models.IntegerField(verbose_name='风险调整后的年化综合投资收益率与寿险业务负债保证成本率差额得分')
+    fin_gap = models.IntegerField(verbose_name='年化会计投资收益率与寿险业务负债有效成本率差额')
+    short_gap = models.IntegerField(verbose_name='中短存续期产品年化综合投资收益率与负债资金成本率差额得分')
+    gap_stress1 = models.IntegerField(verbose_name='压力情景一下预计差额得分')
+    gap_stress2 = models.IntegerField(verbose_name='压力情景二下预计差额得分')
+    gap_stress3 = models.IntegerField(verbose_name='压力情景三下预计差额得分')
     cash_flow_test_base = models.IntegerField(verbose_name='现金流测试得分')
     cash_flow_test_stress = models.IntegerField(verbose_name='现金流压力测试得分')
     liquidity = models.IntegerField(verbose_name='流动性指标得分')
-    tot_score = models.IntegerField(verbose_name='总分')
 
     class Meta:
         verbose_name_plural = verbose_name = '得分情况'

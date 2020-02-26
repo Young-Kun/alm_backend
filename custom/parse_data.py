@@ -68,12 +68,13 @@ class ExcelData:
     @property
     @get_cells
     class Score:
-        sheet_name = '权重分配及评分'
+        sheet_name = '量化评估标准及评分'
         acc_in_row = False
-        rows = {'dur_gap_l_scaled': 3, 'dur_gap_a_scaled': 4, 'hedge_rate': 5, 'dv': 6,
-                'cost_retrun': 7, 'cost_return_stress': 8,
-                'cash_flow_test_base': 9, 'cash_flow_test_stress': 10, 'liquidity': 11, 'tot_score': 13}
-        cols = {'score': 5}
+        rows = {'dur_gap_l_scaled': 4, 'dur_gap_a_scaled': 5, 'hedge_rate': 6, 'dv': 7,
+                'avg_3y_gap': 8, 'comp_gap': 9, 'ra_comp_gap': 10, 'fin_gap': 11, 'short_gap': 13,
+                'gap_stress1': 15, 'gap_stress2': 16, 'gap_stress3': 17,
+                'cash_flow_test_base': 19, 'cash_flow_test_stress': 21, 'liquidity': 23}
+        cols = {'score': 9}
 
     # 会计准备金
     @property
@@ -221,4 +222,4 @@ if __name__ == "__main__":
     data_path = os.path.join(BASE_DIR, '201912.xlsx')
     data = ExcelData(data_path)
 
-    print(data.CashFlowTest)
+    print(data.Score)
