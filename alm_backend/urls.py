@@ -26,7 +26,7 @@ from .settings import MEDIA_ROOT
 router = DefaultRouter()
 # 通用路由
 router.register(r'data', data_views.DataViewSet)
-router.register(r'result', result_views.ScoreViewSet)
+router.register(r'result/score', result_views.ScoreViewSet)
 
 urlpatterns = [
     # 后台管理
