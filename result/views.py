@@ -9,4 +9,7 @@ class ScoreViewSet(mixins.ListModelMixin, GenericViewSet):
     serializer_class = ScoreSerializer
 
     def get_queryset(self):
-        return Score.objects.filter(data__file_name__in=self.request.query_params.getlist('quarters[]'))
+        if self.request.query_params:
+            return Score.objects.filter(data__file_name__in=self.request.query_params.getlist('quarters[]'))
+        else:
+            return Score.objects.all()
