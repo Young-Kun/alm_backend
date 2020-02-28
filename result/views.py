@@ -4,10 +4,7 @@ from data import models
 from . import serializers
 
 
-class ScoreViewSet(mixins.ListModelMixin, GenericViewSet):
-    queryset = models.Score.objects.all()
-    serializer_class = serializers.ScoreSerializer
-
+class BaseQuarterViewSet(mixins.ListModelMixin, GenericViewSet):
     def get_queryset(self):
         month_start = self.request.query_params.get('monthStart')
         month_end = self.request.query_params.get('monthEnd')
@@ -19,25 +16,16 @@ class ScoreViewSet(mixins.ListModelMixin, GenericViewSet):
             return self.queryset
 
 
-class AssetsViewSet(mixins.ListModelMixin, GenericViewSet):
+class ScoreViewSet(BaseQuarterViewSet):
+    queryset = models.Score.objects.all()
+    serializer_class = serializers.ScoreSerializer
+
+
+class AssetsViewSet(BaseQuarterViewSet):
     queryset = models.Assets.objects.all()
     serializer_class = serializers.AssetsSerializer
 
-    def get_queryset(self):
-        queryset = models.Assets.objects.filter(data__file_name__gte=self.request.query_params['monthStart'],
-                                                data__file_name__lte=self.request.query_params['monthEnd'],
-                                                data__file_name__regex=r'^[0-9]{4}(0[369]|12)$').order_by(
-            'data__file_name')
-        return queryset
 
-
-class ReserveViewSet(mixins.ListModelMixin, GenericViewSet):
+class ReserveViewSet(BaseQuarterViewSet):
     queryset = models.Reserve.objects.all()
     serializer_class = serializers.ReserveSerializer
-
-    def get_queryset(self):
-        queryset = models.Reserve.objects.filter(data__file_name__gte=self.request.query_params['monthStart'],
-                                                 data__file_name__lte=self.request.query_params['monthEnd'],
-                                                 data__file_name__regex=r'^[0-9]{4}(0[369]|12)$').order_by(
-            'data__file_name')
-        return queryset
