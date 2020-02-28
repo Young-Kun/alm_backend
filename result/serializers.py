@@ -9,3 +9,9 @@ class ScoreSerializer(serializers.ModelSerializer):
                   'dur_gap_a_scaled', 'hedge_rate', 'dv', 'avg_3y_gap', 'comp_gap', 'ra_comp_gap', 'fin_gap',
                   'short_gap', 'gap_stress1', 'gap_stress2', 'gap_stress3', 'cash_flow_test_base',
                   'cash_flow_test_stress', 'liquidity']
+
+
+class AssetsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Assets
+        fields = '__all__'
