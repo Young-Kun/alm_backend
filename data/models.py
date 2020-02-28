@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import F
 
 from alm_backend.settings import REPORTS_PATH, ACCOUNTS
 from custom.precision import HUNDRED, PERCENT, BILLION

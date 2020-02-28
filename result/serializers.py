@@ -15,3 +15,9 @@ class AssetsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Assets
         fields = ['data', 'account', 'tot', 'cash', 'fixed_income', 'equity', 'loan']
+
+
+class ReserveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Reserve
+        fields = ['data', 'account', 'reserve']

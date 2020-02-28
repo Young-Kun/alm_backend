@@ -28,6 +28,7 @@ router = DefaultRouter()
 router.register(r'data', data_views.DataViewSet)
 router.register(r'result/score', result_views.ScoreViewSet)
 router.register(r'result/assets', result_views.AssetsViewSet)
+router.register(r'result/reserve', result_views.ReserveViewSet)
 
 urlpatterns = [
     # 后台管理
