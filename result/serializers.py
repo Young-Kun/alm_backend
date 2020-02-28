@@ -14,4 +14,4 @@ class ScoreSerializer(serializers.ModelSerializer):
 class AssetsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Assets
-        fields = '__all__'
+        fields = ['data', 'account', 'tot', 'cash', 'fixed_income', 'equity', 'loan']
