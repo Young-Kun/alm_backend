@@ -35,6 +35,8 @@ def get_cells(obj):
                     tmp[field] = -999
                 else:
                     tmp[field] = self.get_cell(sheet_name, row, col, cells_data_type)
+                    if obj.__name__ == 'Reserve' or obj.__name__ == 'Assets':
+                        tmp[field] /= 1e8
             results[acc] = tmp
         return results
 
