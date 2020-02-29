@@ -34,3 +34,9 @@ class CostReturnSerializer(serializers.ModelSerializer):
         model = models.CostReturn
         fields = ['data', 'account', 'eff_cost', 'capital_cost', 'gre_cost', 'avg_3y_cost', 'comp_return', 'fin_return',
                   'ra_comp_return', 'avg_3y_return', 'comp_gap', 'fin_gap', 'ra_comp_gap', 'avg_3y_gap']
+
+
+class CashFlowTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.CashFlowTest
+        fields = '__all__'

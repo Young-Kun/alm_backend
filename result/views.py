@@ -39,3 +39,8 @@ class ModifiedDurationViewSet(BaseQuarterViewSet):
 class CostReturnViewSet(BaseQuarterViewSet):
     queryset = models.CostReturn.objects.all()
     serializer_class = serializers.CostReturnSerializer
+
+
+class CashFlowTestSerializer(BaseQuarterViewSet):
+    queryset = models.CashFlowTest.objects.all()
+    serializer_class = serializers.CashFlowTestSerializer
