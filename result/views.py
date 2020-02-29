@@ -34,3 +34,8 @@ class ReserveViewSet(BaseQuarterViewSet):
 class ModifiedDurationViewSet(BaseQuarterViewSet):
     queryset = models.ModifiedDuration.objects.all()
     serializer_class = serializers.ModifiedDurationSerializer
+
+
+class CostReturnViewSet(BaseQuarterViewSet):
+    queryset = models.CostReturn.objects.all()
+    serializer_class = serializers.CostReturnSerializer

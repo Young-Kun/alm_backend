@@ -30,6 +30,7 @@ router.register(r'result/score', result_views.ScoreViewSet)
 router.register(r'result/assets', result_views.AssetsViewSet)
 router.register(r'result/reserve', result_views.ReserveViewSet)
 router.register(r'result/modified-duration', result_views.ModifiedDurationViewSet)
+router.register(r'result/cost-return', result_views.CostReturnViewSet)
 
 urlpatterns = [
     # 后台管理
