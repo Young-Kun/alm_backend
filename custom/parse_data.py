@@ -99,7 +99,7 @@ class ExcelData:
     class ModifiedDuration:
         sheet_name = '表2-1 期限结构匹配测试表_修正久期'
         rows = {'T': 11, 'C': 6, 'P': 9, 'U': 10}
-        cols = {'l_in': 3, 'l_out': 5, 'a': 2, 'gap_l_scaled': 6, 'gap_a_scaled': 14}
+        cols = {'l_in': 3, 'l_out': 5, 'a': 2, 'gap_l_scaled': 6, 'gap_a_scaled': 14, 'in_scaled': 4}
 
     # 利率风险对冲率
     @property
@@ -222,4 +222,4 @@ if __name__ == "__main__":
     data_path = os.path.join(BASE_DIR, '201912.xlsx')
     data = ExcelData(data_path)
 
-    print(data.Score)
+    print(data.ModifiedDuration)

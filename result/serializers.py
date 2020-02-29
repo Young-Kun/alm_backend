@@ -21,3 +21,9 @@ class ReserveSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Reserve
         fields = ['data', 'account', 'reserve']
+
+
+class ModifiedDurationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ModifiedDuration
+        fields = ['data', 'account', 'l_in', 'l_out', 'a', 'gap_l_scaled', 'gap_a_scaled', 'in_scaled']

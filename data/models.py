@@ -107,6 +107,7 @@ class ModifiedDuration(FieldBaseModel):
     a = models.DecimalField(**HUNDRED, verbose_name='资产修正久期')
     gap_l_scaled = models.DecimalField(**HUNDRED, verbose_name='规模调整后的修正久期缺口')
     gap_a_scaled = models.DecimalField(**HUNDRED, verbose_name='资产调整后的期限缺口')
+    in_scaled = models.DecimalField(**HUNDRED, verbose_name='规模调整后的现金流入修正久期')
 
     class Meta:
         verbose_name_plural = verbose_name = '修正久期'
